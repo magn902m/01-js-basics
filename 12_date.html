@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <p>Din alder</p>
+      <input type="text" id="dinAlderTxt" />
+
+      <p>Din dates alder</p>
+      <input type="text" id="dinDatesAlderTxt" />
+
+      <button>Går det?</button>
+    </div>
+    <script>
+      let min;
+      let max;
+      let dinAlder;
+      let datesAlder;
+
+      document.querySelector("button").addEventListener("click", buttonClicked);
+
+      function buttonClicked() {
+        dinAlder = document.querySelector("#dinAlderTxt").value;
+        datesAlder = document.querySelector("#dinDatesAlderTxt").value;
+
+        // Hvor ung må daten mindst være?
+        min = Math.round(dinAlder / 2 + 7);
+
+        // Hvor gammel må daten højst være?
+        max = Math.round((dinAlder - 7) * 2);
+
+        if (
+          !Number(dinAlder) ||
+          dinAlder < 15 ||
+          !Number(datesAlder) ||
+          datesAlder < 15
+        ) {
+          // Programmet ikke kan benyttes af mindreårige eller pædofile - begge skal være over 15!
+          console.log("Programmet er ikke for mindreårige");
+        } else {
+          // 1. mulighed: daten passer
+          if (datesAlder >= min && datesAlder <= max) {
+            console.log("Det er perfekt, du tager bare på date!");
+          } else if (datesAlder <= min) {
+            // 2. mulighed: daten er for ung
+            console.log(
+              "Du er " +
+                dinAlder +
+                " og din date er " +
+                datesAlder +
+                " din date er " +
+                (min - datesAlder) +
+                " år for ung"
+            );
+          } else if (datesAlder >= max) {
+            // 3. mulighed: daten er for gammel
+            console.log(
+              "Du er " +
+                dinAlder +
+                " og din date er " +
+                datesAlder +
+                " din date er " +
+                (datesAlder - max) +
+                " år for gammel!"
+            );
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
